@@ -2,22 +2,17 @@ class Recorrido
   attr_reader :bicicletas, :clientes, :vehiculos
 
   def preparar(preparadores)
-    preparadores.each{ |preparador|
-      case preparador
-      when Mecanico
-        preparador.preparar_bicicletas(bicicletas)
-      when CoordinadorRecorrido
-        preparador.comprar_comida(clientes)
-      when Conductor
-        preparador.cargar_tanque_agua(vehiculo)
-      end
+    preparadores.each{|preparador|
+      preparador.preparar_recorrido(self)
     }
   end
 end
 
 class Mecanico
-  def preparar_bicicletas(bicicletas)
-    bicicletas.each{ |bicicleta| preparar_bicicleta(bicicleta)}
+  def preparar_recorrido(recorrido)
+    recorrido.bicicletas.each { |bicicleta|
+      preparar_bicicleta(bicicleta)
+    }
   end
 
   def preparar_bicicleta(bicicleta)
@@ -26,12 +21,22 @@ class Mecanico
 end
 
 class CoordinadorRecorrido
+  def preparar_recorrido(recorrido)
+    comprar_comida(recorrido.clientes)
+  end
+
   def comprar_comida(clientes)
     # ...
   end
 end
 
-class Conductor 
+class Conductor
+  def preparar_recorrido(recorrido)
+    vehiculo = recorrido.vehiculo
+    cargar_combustible(vehiculo)
+    cargar_tanque_agua(vehiculo)
+  end
+
   def cargar_combustible(vehiculo)
     # ...
   end
