@@ -5,8 +5,11 @@ class Bicicleta_reclinada < Bicicleta
   attr_reader :bandera
 
   def initialize(**opts)
-    @bandera = opts[:bandera]
     super
+  end
+
+  def post_initialize(opts)
+    @bandera = opts[:bandera]
   end
 
   def repuestos

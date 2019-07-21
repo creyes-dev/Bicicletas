@@ -4,9 +4,12 @@ class Bicicleta_montania < Bicicleta
   attr_reader :amortiguador_delantero, :amortiguador_trasero
 
   def initialize(**opts)
+    super
+  end
+
+  def post_initialize(opts)
     @amortiguador_delantero = opts[:amortiguador_delantero]
     @amortiguador_trasero = opts[:amortiguador_trasero]
-    super
   end
 
   # Cada bicicleta tiene el mismo tamaño por defecto del neumático y de la cadena

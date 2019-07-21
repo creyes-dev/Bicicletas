@@ -4,8 +4,11 @@ class Bicicleta_carretera < Bicicleta
   attr_reader :color_cinta
 
   def initialize(**opts)
-    @color_cinta = opts[:color_cinta]
     super
+  end
+
+  def post_initialize(opts)
+    @color_cinta = opts[:color_cinta]
   end
 
   def repuestos
