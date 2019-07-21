@@ -1,37 +1,22 @@
 class Bicicleta
-  attr_reader :estilo, :tamanio, :color_cinta,
-              :amortiguador_delantero, :amortiguador_trasero
+  attr_reader :tamanio, :cadena, :tamanio_neumatico
 
   def initialize(**opts)
-    @estilo = opts[:estilo]
     @tamanio = opts[:tamanio]
-    @color_cinta = opts[:color_cinta]
-    @amortiguador_delantero = opts[:amortiguador_delantero]
-    @amortiguador_trasero = opts[:amortiguador_trasero]
+    @cadena = opts[:cadena] || cadena_defecto
+    @tamanio_neumatico = opts[:tamanio_neumatico] || tamanio_neumatico_defecto
   end
 
-  # Cada bicicleta tiene el mismo tamaño por defecto del neumático y de la cadena
   def repuestos
-    if estilo == :carretera
-      { cadena:   '11-velocidad',
-        tamanio_neumatico: '23', # milímetros
-        color_cinta: color_cinta
-      }
-    else
-      { cadena: '11-velocidad',
-        tamanio_neumatico: '2.1', # pulgadas
-        color_cinta: amortiguador_delantero
-      }
+    { tamanio_neumatico: tamanio_neumatico,
+      cadena: cadena }
   end
 
-  # otros métodos
+  def cadena_defecto
+    "velocidad-11"
+  end
+
+  def tamanio_neumatico_defecto
+    raise NotImplementedError
+  end
 end
-
-bici = Bicicleta.new(
-  estilo: :montania,
-  tamanio: 'M',
-  amortiguador_delantero: 'Manitou',
-  amortiguador_trasero: 'Fox'
-)
-
-puts bicicleta.repuestos
