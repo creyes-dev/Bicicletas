@@ -18,4 +18,8 @@ class Bicicleta_carretera < Bicicleta
   def tamanio_neumatico_defecto
     "23"
   end
+
+  def dias_espera
+    1
+  end
 end

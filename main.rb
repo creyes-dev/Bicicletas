@@ -1,8 +1,10 @@
 require_relative 'engranaje'
 require_relative 'bicicleta'
+require_relative 'recorrido'
 require_relative 'bicicleta_carretera'
 require_relative 'bicicleta_montania'
 require_relative 'bicicleta_reclinada'
+require 'date'
 
 @rueda = Rueda.new(26, 1.5)
 puts @rueda.circunferencia
@@ -38,3 +40,11 @@ reclinada = Bicicleta_reclinada.new(
 puts reclinada.bandera # => Argentina
 puts reclinada.tamanio_neumatico # => 28 (por defecto bici reclinada)
 puts reclinada.cadena # => velocidad-10 (por defecto para reclinada)
+
+inicio = Date.parse("2019/09/04")
+fin = Date.parse("2019/09/10")
+
+puts montania.programable?(inicio, fin) # => 2019/09/04 - 2 dias de espera - 2019/09/10
+
+mecanico = Mecanico.new()
+puts mecanico.programable?(inicio, fin) # => 2019/09/04 - 4 dias de espera - 2019/09/10

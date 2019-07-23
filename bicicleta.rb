@@ -1,4 +1,7 @@
+require_relative 'programable'
+
 class Bicicleta
+  include Programable
   attr_reader :tamanio, :cadena, :tamanio_neumatico
 
   def initialize(**opts)
@@ -24,5 +27,9 @@ class Bicicleta
 
   def tamanio_neumatico_defecto
     raise NotImplementedError
+  end
+
+  def dias_espera
+    1
   end
 end

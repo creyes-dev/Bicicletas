@@ -1,7 +1,6 @@
 require_relative 'bicicleta'
 
 class Bicicleta_reclinada < Bicicleta
-
   attr_reader :bandera
 
   def initialize(**opts)
@@ -22,5 +21,9 @@ class Bicicleta_reclinada < Bicicleta
 
   def tamanio_neumatico_defecto
     "28"
+  end
+
+  def dias_espera
+    3
   end
 end

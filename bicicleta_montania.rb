@@ -20,4 +20,8 @@ class Bicicleta_montania < Bicicleta
   def tamanio_neumatico_defecto
     "2.1"
   end
+
+  def dias_espera
+    2
+  end
 end
