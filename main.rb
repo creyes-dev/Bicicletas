@@ -3,15 +3,30 @@ require_relative 'bicicleta'
 require_relative 'bicicleta_carretera'
 require_relative 'bicicleta_montania'
 require_relative 'bicicleta_reclinada'
-# require_relative 'partes_bicicleta_carretera'
-# require_relative 'partes_bicicleta_montania'
+require_relative 'partes_bicicleta_carretera'
+require_relative 'partes_bicicleta_montania'
+require_relative 'partes'
 require_relative 'parte'
 require_relative 'recorrido'
 
 require 'date'
 
 cadena = Parte.new(nombre: "cadena", descripcion:"Velocidad-11")
-puts cadena.nombre
+neumatico_carretera = Parte.new(nombre: "tamanio_neumatico", descripcion: "23")
+cinta = Parte.new(nombre: "cinta", descripcion: "rojo")
+neumatico_montania = Parte.new(nombre: "tamanio_neumatico", descripcion: "2.1")
+amortiguador_trasero = Parte.new(nombre: "Amortiguador_trasero", descripcion: "Fox", repuesto_necesario: false)
+amortiguador_delantero = Parte.new(nombre: "Amortiguador_delantero", descripcion: "Manitou")
+
+partes_bicicleta_carretera = Partes.new([cadena, neumatico_carretera, cinta])
+
+bicicleta_carretera = Bicicleta.new(
+  tamanio: "L",
+  partes: partes_bicicleta_carretera
+)
+
+puts bicicleta_carretera.tamanio
+puts bicicleta_carretera.repuestos.inspect
 
 carretera = Bicicleta.new(
    tamanio: "L",
