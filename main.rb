@@ -3,51 +3,62 @@ require_relative 'bicicleta'
 require_relative 'bicicleta_carretera'
 require_relative 'bicicleta_montania'
 require_relative 'bicicleta_reclinada'
+require_relative 'partes_factory'
 require_relative 'partes_bicicleta_carretera'
 require_relative 'partes_bicicleta_montania'
 require_relative 'partes'
-require_relative 'parte'
 require_relative 'recorrido'
 
 require 'date'
 
-cadena = Parte.new(nombre: "cadena", descripcion:"Velocidad-11")
-neumatico_carretera = Parte.new(nombre: "tamanio_neumatico", descripcion: "23")
-cinta = Parte.new(nombre: "cinta", descripcion: "rojo")
-neumatico_montania = Parte.new(nombre: "tamanio_neumatico", descripcion: "2.1")
-amortiguador_trasero = Parte.new(nombre: "Amortiguador_trasero", descripcion: "Fox", repuesto_necesario: false)
-amortiguador_delantero = Parte.new(nombre: "Amortiguador_delantero", descripcion: "Manitou")
+configuracion_carretera = [['cadena', 'velocidad-11'],
+                           ['tamanio_neumatico', '23'],
+                           ['color_cinta', 'rojo']]
 
-partes_bicicleta_carretera = Partes.new([cadena, neumatico_carretera, cinta])
+configuracion_montania = [ ['cadena', 'velocidad-11'],
+                           ['tamanio_neumatico', '2.1'],
+                           ['amortiguador_delantero', 'Manitou'],
+                           ['amortiguador_trasero', 'Fox', false]]
 
-bicicleta_carretera = Bicicleta.new(
-  tamanio: "L",
-  partes: partes_bicicleta_carretera
-)
+puts Partes_factory.construir(config: configuracion_carretera).inspect
 
-puts bicicleta_carretera.tamanio
-puts bicicleta_carretera.repuestos.inspect
-puts bicicleta_carretera.repuestos.size
+#cadena = Parte.new(nombre: "cadena", descripcion:"Velocidad-11")
+#neumatico_carretera = Parte.new(nombre: "tamanio_neumatico", descripcion: "23")
+#cinta = Parte.new(nombre: "cinta", descripcion: "rojo")
+#neumatico_montania = Parte.new(nombre: "tamanio_neumatico", descripcion: "2.1")
+#amortiguador_trasero = Parte.new(nombre: "Amortiguador_trasero", descripcion: "Fox", repuesto_necesario: false)
+#amortiguador_delantero = Parte.new(nombre: "Amortiguador_delantero", descripcion: "Manitou")
 
-carretera = Bicicleta.new(
-   tamanio: "L",
-   partes: Partes_bicicleta_carretera.new(color_cinta: "rojo"))
+#partes_bicicleta_carretera = Partes.new([cadena, neumatico_carretera, cinta])
 
-puts carretera.tamanio # => "L"
-puts carretera.partes # => {:cadena=>"Velocidad-11", :tamanio_neumatico=>"23", :color_cinta=>"rojo"}
+#bicicleta_carretera = Bicicleta.new(
+#  tamanio: "L",
+#  partes: partes_bicicleta_carretera
+#
 
-montania = Bicicleta.new(
-   tamanio: "L",
-   partes: Partes_bicicleta_montania.new(amortiguador_delantero: 'Manitou',
-                                         amortiguador_trasero: 'Fox'))
+#puts bicicleta_carretera.tamanio
+#puts bicicleta_carretera.repuestos.inspect
+#puts bicicleta_carretera.repuestos.size
 
-puts montania.tamanio # => "L"
-puts montania.partes # => {:cadena=>"Velocidad-11", :tamanio_neumatico=>"2.1", :amortiguador_delantero=>"Manitou"}
+#carretera = Bicicleta.new(
+#   tamanio: "L",
+#   partes: Partes_bicicleta_carretera.new(color_cinta: "rojo"))
 
-inicio = Date.parse("2019/09/04")
-fin = Date.parse("2019/09/10")
+#puts carretera.tamanio # => "L"
+#puts carretera.partes # => {:cadena=>"Velocidad-11", :tamanio_neumatico=>"23", :color_cinta=>"rojo"}
 
-puts montania.programable?(inicio, fin) # => 2019/09/04 - 2 dias de espera - 2019/09/10
+#montania = Bicicleta.new(
+#   tamanio: "L",
+#   partes: Partes_bicicleta_montania.new(amortiguador_delantero: 'Manitou',
+#                                         amortiguador_trasero: 'Fox'))
 
-mecanico = Mecanico.new()
-puts mecanico.programable?(inicio, fin) # => 2019/09/04 - 4 dias de espera - 2019/09/10
+#puts montania.tamanio # => "L"
+#puts montania.partes # => {:cadena=>"Velocidad-11", :tamanio_neumatico=>"2.1", :amortiguador_delantero=>"Manitou"}
+
+#inicio = Date.parse("2019/09/04")
+#fin = Date.parse("2019/09/10")
+
+#puts montania.programable?(inicio, fin) # => 2019/09/04 - 2 dias de espera - 2019/09/10
+
+#mecanico = Mecanico.new()
+#puts mecanico.programable?(inicio, fin) # => 2019/09/04 - 4 dias de espera - 2019/09/10
