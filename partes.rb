@@ -1,4 +1,3 @@
-require_relative 'parte'
 require 'forwardable'
 
 class Partes
