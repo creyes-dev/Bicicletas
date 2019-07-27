@@ -27,6 +27,7 @@ bicicleta_carretera = Bicicleta.new(
 
 puts bicicleta_carretera.tamanio
 puts bicicleta_carretera.repuestos.inspect
+puts bicicleta_carretera.repuestos.size
 
 carretera = Bicicleta.new(
    tamanio: "L",

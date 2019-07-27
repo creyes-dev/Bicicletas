@@ -1,30 +1,16 @@
 require_relative 'parte'
+require 'forwardable'
 
 class Partes
-  attr_reader :partes
+  extend Forwardable
+  def_delegators :@partes, :tamanio, :each
+  include Enumerable
 
   def initialize(partes)
     @partes = partes
   end
 
-  # TemplateMethod que permitirá que las subclases agreguen sus propios repuestos
-  #def post_initialize(opts)
-  #  nil
-  #end
-
   def repuestos
-    partes.select{|parte| parte.repuesto_necesario}
+    select{|parte| parte.repuesto_necesario}
   end
-
-  #def tamanio_neumatico_defecto
-  #  raise NotImplementedError
-  #end
-
-  #def repuestos_local
-  #  {}
-  #end
-
-  #def cadena_defecto
-  #  "velocidad-11"
-  #end
 end
