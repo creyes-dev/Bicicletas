@@ -11,6 +11,8 @@ require_relative 'recorrido'
 
 require 'date'
 
+# Configuración de partes de las distintas bicicletas soportadas por la aplicación
+
 configuracion_carretera = [['cadena', 'velocidad-11'],
                            ['tamanio_neumatico', '23'],
                            ['color_cinta', 'rojo']]
@@ -20,45 +22,30 @@ configuracion_montania = [ ['cadena', 'velocidad-11'],
                            ['amortiguador_delantero', 'Manitou'],
                            ['amortiguador_trasero', 'Fox', false]]
 
-puts Partes_factory.construir(config: configuracion_carretera).inspect
+# instanciación de una bicicleta de carretera
+carretera = Bicicleta.new(tamanio: 'L',
+                          partes: Partes_factory.construir(config:
+                            configuracion_carretera))
 
-#cadena = Parte.new(nombre: "cadena", descripcion:"Velocidad-11")
-#neumatico_carretera = Parte.new(nombre: "tamanio_neumatico", descripcion: "23")
-#cinta = Parte.new(nombre: "cinta", descripcion: "rojo")
-#neumatico_montania = Parte.new(nombre: "tamanio_neumatico", descripcion: "2.1")
-#amortiguador_trasero = Parte.new(nombre: "Amortiguador_trasero", descripcion: "Fox", repuesto_necesario: false)
-#amortiguador_delantero = Parte.new(nombre: "Amortiguador_delantero", descripcion: "Manitou")
+# Obtener repuestos de la bicicleta de carretera
+puts carretera.repuestos
 
-#partes_bicicleta_carretera = Partes.new([cadena, neumatico_carretera, cinta])
+# instanciación de una bicicleta de montania
+montania = Bicicleta.new(tamanio: 'M',
+                         partes: Partes_factory.construir(config:
+                          configuracion_montania))
 
-#bicicleta_carretera = Bicicleta.new(
-#  tamanio: "L",
-#  partes: partes_bicicleta_carretera
-#
+# Obtener repuestos de la bicicleta de montania
+puts montania.repuestos # Observar que no muestra la parte amortiguador_trasero
 
-#puts bicicleta_carretera.tamanio
-#puts bicicleta_carretera.repuestos.inspect
-#puts bicicleta_carretera.repuestos.size
+puts montania.tamanio # => "L"
 
-#carretera = Bicicleta.new(
-#   tamanio: "L",
-#   partes: Partes_bicicleta_carretera.new(color_cinta: "rojo"))
+# Obtener disponibilidad de la bicicleta de montania y de un mecanico
+# ambos sin recorridos programados
+inicio = Date.parse("2019/09/04")
+fin = Date.parse("2019/09/10")
 
-#puts carretera.tamanio # => "L"
-#puts carretera.partes # => {:cadena=>"Velocidad-11", :tamanio_neumatico=>"23", :color_cinta=>"rojo"}
+puts montania.programable?(inicio, fin) # => 2019/09/04 - 1 dias de espera - 2019/09/10
 
-#montania = Bicicleta.new(
-#   tamanio: "L",
-#   partes: Partes_bicicleta_montania.new(amortiguador_delantero: 'Manitou',
-#                                         amortiguador_trasero: 'Fox'))
-
-#puts montania.tamanio # => "L"
-#puts montania.partes # => {:cadena=>"Velocidad-11", :tamanio_neumatico=>"2.1", :amortiguador_delantero=>"Manitou"}
-
-#inicio = Date.parse("2019/09/04")
-#fin = Date.parse("2019/09/10")
-
-#puts montania.programable?(inicio, fin) # => 2019/09/04 - 2 dias de espera - 2019/09/10
-
-#mecanico = Mecanico.new()
-#puts mecanico.programable?(inicio, fin) # => 2019/09/04 - 4 dias de espera - 2019/09/10
+mecanico = Mecanico.new()
+puts mecanico.programable?(inicio, fin)
